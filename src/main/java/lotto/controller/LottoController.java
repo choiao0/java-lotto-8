@@ -4,6 +4,7 @@ import lotto.domain.BonusNumber;
 import lotto.domain.LottoQuantity;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningLottos;
 import lotto.domain.WinningNumbers;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
@@ -56,5 +57,7 @@ public class LottoController {
                 lottoOutput.printError(e.getMessage());
             }
         }
+
+        WinningLottos winningLottos = WinningLottos.of(lottos, winningNumbers, bonusNumber);
     }
 }
