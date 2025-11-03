@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -12,7 +12,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.numbers = new ArrayList<>(numbers);
+        this.numbers = sortNumbers(numbers);
     }
 
     private void validate(List<Integer> numbers) {
@@ -27,5 +27,9 @@ public class Lotto {
         }
     }
 
-    // TODO: 추가 기능 구현
+    private List<Integer> sortNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
+    }
 }
