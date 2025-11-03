@@ -12,14 +12,14 @@ public class PurchaseAmount {
 
     private void validate(String purchaseAmount) {
         if (purchaseAmount == null || !purchaseAmount.matches("\\d+")) {
-            throw new IllegalArgumentException("[ERROR] 로또 구입 금액은 숫자만 입력할 수 있습니다.");
+            throw new IllegalArgumentException("[ERROR] 로또 구입 금액은 숫자만 입력할 수 있습니다.\n");
         }
         int amount = parseToInt(purchaseAmount);
         if (amount < LOTTO_PRICE_UNIT) {
-            throw new IllegalArgumentException("[ERROR] 로또 구입 금액은 1,000원 이상이어야 합니다.");
+            throw new IllegalArgumentException("[ERROR] 로또 구입 금액은 1,000원 이상이어야 합니다.\n");
         }
         if (amount % LOTTO_PRICE_UNIT != 0) {
-            throw new IllegalArgumentException("[ERROR] 로또 구입 금액은 1,000원 단위여야 합니다.");
+            throw new IllegalArgumentException("[ERROR] 로또 구입 금액은 1,000원 단위여야 합니다.\n");
         }
     }
 
