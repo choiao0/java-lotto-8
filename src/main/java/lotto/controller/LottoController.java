@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
 import lotto.domain.BonusNumber;
 import lotto.domain.LottoQuantity;
 import lotto.domain.Lottos;
@@ -21,6 +20,27 @@ public class LottoController {
     }
 
     public void run() {
+        PurchaseAmount purchaseAmount = getPurchaseAmount();
+        LottoQuantity lottoQuantity = LottoQuantity.from(purchaseAmount);
+        int quantity = lottoQuantity.getQuantity();
+        lottoOutput.printQuantity(quantity);
+
+        Lottos lottos = Lottos.generateLottos(quantity);
+        lottoOutput.printLottoNumbers(lottos.getLottos());
+
+        WinningNumbers winningNumbers = getWinningNumbers();
+        BonusNumber bonusNumber = getBonusNumber();
+
+        WinningLottos winningLottos = WinningLottos.of(lottos, winningNumbers, bonusNumber);
+        WinningStatistics statistics = new WinningStatistics(winningLottos);
+
+        lottoOutput.printStatistics(statistics.formatStatistics());
+
+        int totalPurchaseAmount = purchaseAmount.getPurchaseAmount();
+        lottoOutput.printReturnRate(statistics.calculateReturnRate(totalPurchaseAmount));
+    }
+
+    private PurchaseAmount getPurchaseAmount() {
         PurchaseAmount purchaseAmount = null;
         while (purchaseAmount == null) {
             try {
@@ -31,13 +51,10 @@ public class LottoController {
                 lottoOutput.printError(e.getMessage());
             }
         }
-        LottoQuantity lottoQuantity = LottoQuantity.from(purchaseAmount);
-        int quantity = lottoQuantity.getQuantity();
-        lottoOutput.printQuantity(quantity);
+        return purchaseAmount;
+    }
 
-        Lottos lottos = Lottos.generateLottos(quantity);
-        lottoOutput.printLottoNumbers(lottos.getLottos());
-
+    private WinningNumbers getWinningNumbers() {
         WinningNumbers winningNumbers = null;
         while (winningNumbers == null) {
             try {
@@ -48,7 +65,10 @@ public class LottoController {
                 lottoOutput.printError(e.getMessage());
             }
         }
+        return winningNumbers;
+    }
 
+    private BonusNumber getBonusNumber() {
         BonusNumber bonusNumber = null;
         while (bonusNumber == null) {
             try {
@@ -59,14 +79,6 @@ public class LottoController {
                 lottoOutput.printError(e.getMessage());
             }
         }
-
-        WinningLottos winningLottos = WinningLottos.of(lottos, winningNumbers, bonusNumber);
-        WinningStatistics statistics = new WinningStatistics(winningLottos);
-
-        List<String> formatStatistics = statistics.formatStatistics();
-        lottoOutput.printStatistics(formatStatistics);
-
-        double returnRate = statistics.calculateReturnRate(purchaseAmount.getPurchaseAmount());
-        lottoOutput.printReturnRate(returnRate);
+        return bonusNumber;
     }
 }
