@@ -54,4 +54,8 @@ public class WinningNumbers {
     private int parseToInt(String numbers) {
         return Integer.parseInt(numbers);
     }
+
+    public List<Integer> getNumbers() {
+        return winningNumbers;
+    }
 }

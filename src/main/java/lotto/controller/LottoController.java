@@ -1,11 +1,13 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.BonusNumber;
 import lotto.domain.LottoQuantity;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLottos;
 import lotto.domain.WinningNumbers;
+import lotto.domain.WinningStatistics;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
 
@@ -59,5 +61,9 @@ public class LottoController {
         }
 
         WinningLottos winningLottos = WinningLottos.of(lottos, winningNumbers, bonusNumber);
+        WinningStatistics statistics = new WinningStatistics(winningLottos);
+        List<String> formatStatistics = statistics.formatStatistics();
+
+        lottoOutput.printStatistics(formatStatistics);
     }
 }

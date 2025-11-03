@@ -30,4 +30,8 @@ public class BonusNumber {
     private int parseToInt(String numbers) {
         return Integer.parseInt(numbers);
     }
+
+    public int getBonusNumber() {
+        return bounsNumber;
+    }
 }
