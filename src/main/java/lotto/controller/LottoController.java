@@ -30,8 +30,10 @@ public class LottoController {
         }
         LottoQuantity lottoQuantity = LottoQuantity.from(purchaseAmount);
         int quantity = lottoQuantity.getQuantity();
+        lottoOutput.printQuantity(quantity);
 
         Lottos lottos = Lottos.generateLottos(quantity);
+        lottoOutput.printLottoNumbers(lottos.getLottos());
 
         WinningNumbers winningNumbers = null;
         while (winningNumbers == null) {
@@ -54,6 +56,5 @@ public class LottoController {
                 lottoOutput.printError(e.getMessage());
             }
         }
-
     }
 }
