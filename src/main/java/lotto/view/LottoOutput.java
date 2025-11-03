@@ -11,6 +11,11 @@ public class LottoOutput {
         System.out.println("당첨 번호를 입력해 주세요.");
     }
 
+    public void printBonusNumberInputGuide() {
+        System.out.println();
+        System.out.println("보너스 번호를 입력해 주세요.");
+    }
+
     public void printError(String message) {
         System.out.println(message);
     }

@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.LottoQuantity;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
@@ -38,6 +39,17 @@ public class LottoController {
                 lottoOutput.printWinningNumbersInputGuide();
                 String numbers = lottoInput.inputWinningNumbers();
                 winningNumbers = new WinningNumbers(numbers);
+            } catch (IllegalArgumentException e) {
+                lottoOutput.printError(e.getMessage());
+            }
+        }
+
+        BonusNumber bonusNumber = null;
+        while (bonusNumber == null) {
+            try {
+                lottoOutput.printBonusNumberInputGuide();
+                String number = lottoInput.inputBonusNumber();
+                bonusNumber = new BonusNumber(number);
             } catch (IllegalArgumentException e) {
                 lottoOutput.printError(e.getMessage());
             }

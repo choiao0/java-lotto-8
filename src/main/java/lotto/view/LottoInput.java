@@ -10,4 +10,8 @@ public class LottoInput {
     public String inputWinningNumbers() {
         return Console.readLine();
     }
+
+    public String inputBonusNumber() {
+        return Console.readLine();
+    }
 }
