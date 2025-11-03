@@ -26,7 +26,7 @@ public class WinningNumbersTest {
     void 당첨_번호에_숫자와_쉼표_외의_다른_문자가_있으면_예외가_발생한다() {
         assertThatThrownBy(() -> new WinningNumbers("1.2.3.4.5.6"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 당첨 번호는 6개여야 합니다.");
+                .hasMessage("[ERROR] 당첨 번호는 숫자만 입력할 수 있습니다.");
     }
 
     @Test
