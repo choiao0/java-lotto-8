@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import lotto.domain.LottoQuantity;
+import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
@@ -24,6 +26,9 @@ public class LottoController {
                 lottoOutput.printError(e.getMessage());
             }
         }
-    }
+        LottoQuantity lottoQuantity = LottoQuantity.from(purchaseAmount);
+        int quantity = lottoQuantity.getQuantity();
 
+        Lottos lottos = Lottos.generateLottos(quantity);
+    }
 }
