@@ -7,6 +7,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class WinningNumbersTest {
+    @Test
+    void 당첨_번호가_공백이면_예외가_발생한다() {
+        assertThatThrownBy(() -> new WinningNumbers(" , , , , , "))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 당첨 번호는 공백일 수 없습니다.");
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"0,1,2,3,4,5", "1,2,3,4,5,46", "-1,1,2,3,4,5"})
     void 당첨_번호가_1부터_45_사잇값이_아니면_예외가_발생한다(String numbers) {
