@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.ErrorCode;
+import net.bytebuddy.agent.builder.AgentBuilder.InstallationListener.ErrorSuppressing;
+
 public class BonusNumber {
     private final int bounsNumber;
 
@@ -10,18 +13,18 @@ public class BonusNumber {
 
     private int validate(String bounsNumber) {
         if (bounsNumber == null || bounsNumber.trim().isEmpty()) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 공백일 수 없습니다.");
+            throw new IllegalArgumentException(ErrorCode.BONUS_NUMBER_BLANK.getMessage());
         }
 
         int number;
         try {
             number = parseToInt(bounsNumber.trim());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자만 입력할 수 있습니다.");
+            throw new IllegalArgumentException(ErrorCode.BONUS_NUMBER_INVALID.getMessage());
         }
 
         if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 1과 45 사이여야 합니다.");
+            throw new IllegalArgumentException(ErrorCode.BONUS_NUMBER_OUT_OF_RANGE.getMessage());
         }
 
         return number;

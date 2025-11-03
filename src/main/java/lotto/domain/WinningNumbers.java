@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.exception.ErrorCode;
 
 public class WinningNumbers {
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -21,31 +22,31 @@ public class WinningNumbers {
 
         for (String numberString : numbersString) {
             if (numberString == null || numberString.trim().isEmpty()) {
-                throw new IllegalArgumentException("[ERROR] 당첨 번호는 공백일 수 없습니다.");
+                throw new IllegalArgumentException(ErrorCode.WINNING_NUMBER_BLANK.getMessage());
             }
 
             int number;
             try {
                 number = parseToInt(numberString.trim());
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("[ERROR] 당첨 번호는 숫자만 입력할 수 있습니다.");
+                throw new IllegalArgumentException(ErrorCode.WINNING_NUMBER_INVALID.getMessage());
             }
 
             if (number < 1 || number > 45) {
-                throw new IllegalArgumentException("[ERROR] 당첨 번호는 1과 45 사이여야 합니다.");
+                throw new IllegalArgumentException(ErrorCode.WINNING_NUMBER_OUT_OF_RANGE.getMessage());
             }
             numbers.add(number);
         }
 
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(
-                    String.format("[ERROR] 당첨 번호는 %d개여야 합니다.", LOTTO_NUMBER_COUNT)
+                    String.format(ErrorCode.WINNING_NUMBER_SIZE.getMessage(LOTTO_NUMBER_COUNT))
             );
         }
 
         Set<Integer> numberSet = new HashSet<>(numbers);
         if (numberSet.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorCode.WINNING_NUMBER_DUPLICATE.getMessage());
         }
 
         return numbers;

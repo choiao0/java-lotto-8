@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.ErrorCode;
+
 public class PurchaseAmount {
     private static final int LOTTO_PRICE_UNIT = 1000;
 
@@ -12,14 +14,14 @@ public class PurchaseAmount {
 
     private void validate(String purchaseAmount) {
         if (purchaseAmount == null || !purchaseAmount.matches("\\d+")) {
-            throw new IllegalArgumentException("[ERROR] 로또 구입 금액은 숫자만 입력할 수 있습니다.");
+            throw new IllegalArgumentException(ErrorCode.PURCHASE_AMOUNT_INVALID.getMessage());
         }
         int amount = parseToInt(purchaseAmount);
         if (amount < LOTTO_PRICE_UNIT) {
-            throw new IllegalArgumentException("[ERROR] 로또 구입 금액은 1,000원 이상이어야 합니다.");
+            throw new IllegalArgumentException(ErrorCode.PURCHASE_AMOUNT_MIN.getMessage());
         }
         if (amount % LOTTO_PRICE_UNIT != 0) {
-            throw new IllegalArgumentException("[ERROR] 로또 구입 금액은 1,000원 단위여야 합니다.");
+            throw new IllegalArgumentException(ErrorCode.PURCHASE_AMOUNT_UNIT.getMessage());
         }
     }
 
