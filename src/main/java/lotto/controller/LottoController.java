@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.LottoQuantity;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningNumbers;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
 
@@ -30,5 +31,17 @@ public class LottoController {
         int quantity = lottoQuantity.getQuantity();
 
         Lottos lottos = Lottos.generateLottos(quantity);
+
+        WinningNumbers winningNumbers = null;
+        while (winningNumbers == null) {
+            try {
+                lottoOutput.printWinningNumbersInputGuide();
+                String numbers = lottoInput.inputWinningNumbers();
+                winningNumbers = new WinningNumbers(numbers);
+            } catch (IllegalArgumentException e) {
+                lottoOutput.printError(e.getMessage());
+            }
+        }
+
     }
 }

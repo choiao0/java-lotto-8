@@ -6,4 +6,8 @@ public class LottoInput {
     public String inputPurchaseAmount() {
         return Console.readLine();
     }
+
+    public String inputWinningNumbers() {
+        return Console.readLine();
+    }
 }
