@@ -42,6 +42,10 @@ public class LottoOutput {
         }
     }
 
+    public void printReturnRate(double returnRate) {
+        System.out.println("총 수익률은 " + returnRate + "%입니다.");
+    }
+
     public void printError(String message) {
         System.out.println(message);
     }

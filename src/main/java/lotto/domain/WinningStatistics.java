@@ -41,4 +41,16 @@ public class WinningStatistics {
         }
         return label;
     }
+
+    public double calculateReturnRate(int purchaseAmount) {
+        long totalPrize = getTotalPrize();
+        double rate = (double) totalPrize / purchaseAmount * 100;
+        return Math.round(rate * 100) / 100.0;
+    }
+
+    private long getTotalPrize() {
+        return counts.entrySet().stream()
+                .mapToLong(e -> e.getKey().getWinningMoney() * e.getValue())
+                .sum();
+    }
 }

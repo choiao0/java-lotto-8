@@ -62,8 +62,11 @@ public class LottoController {
 
         WinningLottos winningLottos = WinningLottos.of(lottos, winningNumbers, bonusNumber);
         WinningStatistics statistics = new WinningStatistics(winningLottos);
-        List<String> formatStatistics = statistics.formatStatistics();
 
+        List<String> formatStatistics = statistics.formatStatistics();
         lottoOutput.printStatistics(formatStatistics);
+
+        double returnRate = statistics.calculateReturnRate(purchaseAmount.getPurchaseAmount());
+        lottoOutput.printReturnRate(returnRate);
     }
 }
